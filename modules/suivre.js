@@ -16,8 +16,26 @@ router.get("/", (req, res) => {
 
 // Route vers la page à propos
 // /suivre/parametre
-router.get("/:suivre", (req, res) => {
-    res.send("suivre n° "+req.params.suivre);
+router.get("/:suivre/etudiant", (req, res) => {
+    suivreService.fetchSuivreByIDForEtudiant(req.params.suivre).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
+    });
+});
+
+// Route vers la page à propos
+// /suivre/parametre
+router.get("/:suivre/ue", (req, res) => {
+    suivreService.fetchSuivreByIDForUE(req.params.suivre).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
+    });
 });
 
 module.exports = router;
