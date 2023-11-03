@@ -16,8 +16,24 @@ router.get("/", (req, res) => {
 
 // Route vers la page à propos
 // /proposer/parametre
-router.get("/:proposer", (req, res) => {
-    res.send("Proposer n° "+req.params.proposer);
-});
+router.get("/:proposer/UE", (req, res) => {
+    proposerService.fetchProposerByIDForUE(req.params.proposer).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message": "Error" + err.sqlMessage})
+    });
+})
+
+router.get("/:proposer/etablissement", (req, res) => {
+    proposerService.fetchProposerByIDForEtablissement(req.params.proposer).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message": "Error" + err.sqlMessage})
+    });
+})
 
 module.exports = router;
