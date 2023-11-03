@@ -17,7 +17,13 @@ router.get("/", (req, res) => {
 // Route vers la page à propos
 // /formateur/parametre
 router.get("/:formateur", (req, res) => {
-    res.send("Formateur n° "+req.params.formateur);
+    formateurService.fetchFormateurById(req.params.formateur).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
+    });
 });
 
 module.exports = router;

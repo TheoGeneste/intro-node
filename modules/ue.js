@@ -17,7 +17,13 @@ router.get("/", (req, res) => {
 // Route vers la page à propos
 // /ue/parametre
 router.get("/:ue", (req, res) => {
-    res.send("UE n° "+req.params.ue);
+    ueService.fetchUEByID(req.params.ue).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
+    });
 });
 
 module.exports = router;

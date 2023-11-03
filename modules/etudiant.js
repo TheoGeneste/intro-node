@@ -18,7 +18,13 @@ router.get("/", (req, res) => {
 // Route vers la page à propos
 // /etudiant/parametre
 router.get("/:etudiant", (req, res) => {
-    res.send("Etudiant n° "+req.params.etudiant);
+    etudiantService.fetchEtudiantById(req.params.etudiant).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
+    });
 });
 
 module.exports = router;
