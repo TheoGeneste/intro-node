@@ -7,17 +7,25 @@ const conn = require("../services/database");
 // Route vers la page d'accueil
 // /etablissement/
 router.get("/", async (req, res) => {
-    conn.query('SELECT eta_id, eta_nom, eta_ville FROM etablissement;', (err, data) => {
-        if (err) throw err;
+    etablissementService.fetchEtablissement().then(result => {
         res.status(200)
-        res.json(data)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
     });
 });
 
 // Route vers la page à propos
 // /etablissement/parametre
 router.get("/:etablissement", (req, res) => {
-    res.send("Etablissement n° "+req.params.etablissement);
+    etablissementService.fetchEtablissementByID(req.params.etablissement).then(result => {
+        res.status(200)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
+    });
 });
 
 module.exports = router;

@@ -1,14 +1,17 @@
 const express = require("express");
 const conn = require("../services/database");
+const etudiantService = require("../services/etudiantService");
 const router = express.Router();
 
 // Route vers la page d'accueil
 // /etudiant/
 router.get("/", (req, res) => {
-    conn.query('SELECT etu_id, etu_nom, etu_prenom, etu_numero, CONCAT("http://127.0.0.1:3000/etudiant/",etu_id) as uri FROM scolarite.etudiant;', (err, data) => {
-        if (err) throw err;
+    etudiantService.fetchEtudiant().then(result => {
         res.status(200)
-        res.json(data)
+        res.json(result);
+    }).catch(err => {
+        console.error("Oops...", err);
+        res.json({"message" : "Error" + err.sqlMessage})
     });
 });
 
