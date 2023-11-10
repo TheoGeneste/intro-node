@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
 router.get("/:etudiant", (req, res) => {
     etudiantService.fetchEtudiantById(req.params.etudiant).then(result => {
         res.status(200)
-        res.json(result);
+        res.json(result[0]);
     }).catch(err => {
         console.error("Oops...", err);
         res.json({"message" : "Error" + err.sqlMessage})

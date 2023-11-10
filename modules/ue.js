@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 router.get("/:ue", (req, res) => {
     ueService.fetchUEByID(req.params.ue).then(result => {
         res.status(200)
-        res.json(result);
+        res.json(result[0]);
     }).catch(err => {
         console.error("Oops...", err);
         res.json({"message" : "Error" + err.sqlMessage})

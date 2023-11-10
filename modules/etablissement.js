@@ -21,10 +21,10 @@ router.get("/", async (req, res) => {
 router.get("/:etablissement", (req, res) => {
     etablissementService.fetchEtablissementByID(req.params.etablissement).then(result => {
         res.status(200)
-        res.json(result);
+        res.json(result[0]);
     }).catch(err => {
         console.error("Oops...", err);
-        res.json({"message" : "Error" + err.sqlMessage})
+        res.json({"message" : "Error " + err.sqlMessage})
     });
 });
 

@@ -7,8 +7,26 @@ const formateur = require("./modules/formateur");
 const suivre = require("./modules/suivre");
 const ue = require("./modules/ue");
 const proposer = require("./modules/proposer");
+const cors = require("cors");
 const app = express();
 const port = 3000;
+
+// app.use(cors({
+//     origin: 'http://127.0.0.1:3001'
+// }));
+var allowedOrigins = ['http://localhost:3001',
+    'http://127.0.0.1:3001'];
+
+app.use(cors({
+    origin: function(origin, callback){    // allow requests with no origin
+        // (like mobile apps or curl requests)
+        if(!origin) return callback(null, true);    if(allowedOrigins.indexOf(origin) === -1){
+            var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }    return callback(null, true);
+    }
+}));
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
@@ -21,6 +39,7 @@ app.get("/", (req, res) => {
 // app.use("/wiki", wiki);
 
 // Route de etablissement dans fichier etablissement.js
+// const etablissement = require("./modules/etablissement")
 app.use("/etablissement", etablissement);
 
 // Route de etudiant dans fichier etudiant.js
