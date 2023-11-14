@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const etablissementService = require("../services/etablissementService")
-// const {fetchEtablissement} = require("../services/etablissementService")
-const conn = require("../services/database");
 
 // Route vers la page d'accueil
 // /etablissement/
