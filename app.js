@@ -58,7 +58,7 @@ app.use("/ue", ue);
 // Route de ue dans fichier ue.js
 app.use("/proposer", proposer);
 
-app.use('/image', images)
+app.use('/images', images)
 
 app.listen(port, () => {
     console.log(`Application exemple à l'écoute sur le port http://127.0.0.1:${port}/ !`);
