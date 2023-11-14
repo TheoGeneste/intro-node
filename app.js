@@ -7,6 +7,7 @@ const formateur = require("./modules/formateur");
 const suivre = require("./modules/suivre");
 const ue = require("./modules/ue");
 const proposer = require("./modules/proposer");
+const images = require("./modules/images");
 const cors = require("cors");
 const app = express();
 const port = 3000;
@@ -56,6 +57,8 @@ app.use("/ue", ue);
 
 // Route de ue dans fichier ue.js
 app.use("/proposer", proposer);
+
+app.use('/image', images)
 
 app.listen(port, () => {
     console.log(`Application exemple à l'écoute sur le port http://127.0.0.1:${port}/ !`);
