@@ -16,7 +16,8 @@ const fetchSuivre = () => {
 }
 const fetchSuivreByIDForEtudiant = (id) => {
     return new Promise((resolve, reject) => {
-        let sql = `SELECT suivre.etu_id, suivre.ue_id, etudiant.etu_nom, etudiant.etu_prenom, CONCAT('http://127.0.0.1:3000/etudiant/',etudiant.etu_id) as uri_etudiant, ue.ue_label, CONCAT('http://127.0.0.1:3000/ue/',ue.ue_id) as uri_ue
+        let sql = `SELECT suivre.etu_id, suivre.ue_id, etudiant.etu_nom, etudiant.etu_prenom, CONCAT('http://127.0.0.1:3000/etudiant/',etudiant.etu_id) as uri_etudiant, 
+       ue.ue_label, CONCAT('http://127.0.0.1:3000/ue/',ue.ue_id) as uri_ue
                    FROM suivre
                             INNER JOIN etudiant ON etudiant.etu_id = suivre.etu_id
                             INNER JOIN ue ON ue.ue_id = suivre.ue_id

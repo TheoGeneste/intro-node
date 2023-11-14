@@ -14,8 +14,8 @@ router.get("/", (req, res) => {
     });
 });
 
-// Route vers la page à propos
-// /suivre/parametre
+// Route Pour afficher les element quand un etudiant est donné
+// /suivre/parametre/etudiant
 router.get("/:suivre/etudiant", (req, res) => {
     suivreService.fetchSuivreByIDForEtudiant(req.params.suivre).then(result => {
         res.status(200)
@@ -27,7 +27,7 @@ router.get("/:suivre/etudiant", (req, res) => {
 });
 
 // Route vers la page à propos
-// /suivre/parametre
+// /suivre/parametre/ue
 router.get("/:suivre/ue", (req, res) => {
     suivreService.fetchSuivreByIDForUE(req.params.suivre).then(result => {
         res.status(200)
