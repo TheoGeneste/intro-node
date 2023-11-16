@@ -11,12 +11,16 @@ const images = require("./modules/images");
 const cors = require("cors");
 const app = express();
 const port = 3000;
+app.use(express.json());
+
 
 // app.use(cors({
 //     origin: 'http://127.0.0.1:3001'
 // }));
-var allowedOrigins = ['http://localhost:3001',
+const allowedOrigins = ['http://localhost:3001',
     'http://127.0.0.1:3001'];
+
+
 
 app.use(cors({
     origin: function(origin, callback){    // allow requests with no origin
@@ -32,6 +36,7 @@ app.use(cors({
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
+
 //
 // app.get("/etudiants", (req, res) => {
 //     res.send(etudiants)

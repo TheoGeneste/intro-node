@@ -27,4 +27,15 @@ router.get("/:etudiant", (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+    let data = req.body;
+    etudiantService.addEtudiant(data).then(result => {
+        res.status(201)
+        res.json(data)
+    }).catch(err => {
+        console.log(err)
+        res.send({"message" : "Votre ajout ne s'est pas bien passé"})
+    })
+})
+
 module.exports = router;
