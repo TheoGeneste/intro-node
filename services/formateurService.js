@@ -20,7 +20,17 @@ const fetchFormateurById = (id) => {
     });
 }
 
+const addFormateur = (formateur) => {
+    return new Promise((resolve, reject) => {
+        let sql = `INSERT INTO formateur (fo_nom, fo_prenom, fo_adresse, fo_numero, fo_mail) VALUES ('${formateur.nom}','${formateur.prenom}','${formateur.adresse}','${formateur.numero}', '${formateur.mail}')`;
+        let query = conn.query(sql, (err, result, field) => {
+            if(err) return reject(err);
+            resolve(result);
+        });
+    });
+}
 module.exports = {
     fetchFormateur,
-    fetchFormateurById
+    fetchFormateurById,
+    addFormateur
 }

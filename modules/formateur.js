@@ -26,4 +26,15 @@ router.get("/:formateur", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+    formateurService.addFormateur(req.body).then(result => {
+        res.status(201)
+        res.json(req.body);
+    }).catch(err => {
+        console.log(err);
+        // res.send("Une erreur est survenue")
+        res.json({message : "Une erreur est survenue"})
+    })
+})
+
 module.exports = router;
